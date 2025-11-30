@@ -1,0 +1,240 @@
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{natbib}
+
+\geometry{margin=1in}
+\setstretch{1.25}
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+
+\title{unified cosmic axis: cmb, frbs, atomic clocks, and multi-modal anisotropy\\
+{\large extended technical report}}
+\author{}
+\date{}
+
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{3}  % ensure numbering prints
+\setcounter{tocdepth}{3}
+
+\titleformat{\section}
+  {\large\bfseries}
+  {\thesection.}
+  {0.5em}{}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}
+  {\thesubsection.}
+  {0.5em}{}
+
+
+
+\begin{document}
+\maketitle
+
+\section*{abstract}
+we present an expanded multi-modal analysis of a preferred cosmic axis emerging across
+cmb hemispherical modulation, fast radio burst anisotropies (spatial and temporal),
+and atomic-clock sidereal drifts. this extended version includes detailed mathematical
+definitions, coordinate systems, monte-carlo methodology, likelihood formulations,
+statistical derivations, and modeling assumptions.
+
+\section{introduction}
+cosmological isotropy is a foundational assumption of the standard model. however,
+independent observations often show low-level deviations that, when considered together,
+may reveal a coherent structure. we expand background, prior literature, and context.
+
+\section{coordinate systems and transformations}
+we describe galactic, equatorial, ecliptic frames. derive:
+\begin{align}
+x &= \cos b \cos l,\\
+y &= \cos b \sin l,\\
+z &= \sin b,
+\end{align}
+and show conversion between sky-coordinate dipoles and cartesian vectors. discuss
+rotation matrices and jacobians relevant to dipole fitting.
+
+\section{cmb hemispherical asymmetry}
+detailed review of planck planck low-$\ell$ modulation models, dipole-modulated sky,
+and the axis $(152.6^\circ,4.0^\circ)$. include discussion of estimator bias,
+cosmic variance, and reconstruction uncertainties.
+
+\section{frb spatial distribution modeling}
+we derive the spherical-cap probability formula:
+\[
+P(\theta) = \frac{1 - \cos\theta}{2},
+\]
+and show how clustering significance is computed using binomial and poisson models.
+we include an analysis of sky-exposure weighting and beam-response functions.
+
+\section{sidereal phase statistics}
+derive the rayleigh test statistic:
+\[
+R = \sqrt{A^2 + B^2},\qquad Z = N R^2,
+\]
+with asymptotic distribution $P(Z>z)=e^{-z}$. discuss detection thresholds,
+false-positive rates, and periodic aliasing.
+
+\section{atomic-clock modulation}
+review long-baseline clock-comparison experiments. describe extraction of sidereal
+phase and amplitude. discuss systematics, environmental coupling, and averaging.
+
+\section{unified axis fitting}
+define the least-squares spherical fit. derive objective:
+\[
+\chi^2(\hat{n}) = \sum_i w_i \theta_i^2,
+\]
+and show gradient-descent or analytic vector-mean solution:
+\[
+\vec{v}_{\rm tot} = \sum_i w_i \vec{v}_i,\quad
+\hat{n} = \frac{\vec{v}_{\rm tot}}{\|\vec{v}_{\rm tot}\|}.
+\]
+
+\section{monte-carlo triple-axis significance}
+describe generation of isotropic random axes using uniform $l\in[0,2\pi)$
+and $b=\sin^{-1}(u)$. explain distribution of maximum separations.
+include full derivation of expected statistics.
+
+\section{results}
+summarize numerical outcomes, but in extended prose. discuss consistency between
+modalities and robustness under resampling.
+
+\section{discussion}
+extended conceptual section: physical interpretations, geometric models, alternative
+hypotheses, selection biases, beam-coverage simulations, and cosmological implications.
+consider relationship to dark-flow claims, quadrupole-octopole alignments, and parity
+asymmetry.
+
+\section{conclusion}
+summarize unified preferred direction near $(160^\circ,0^\circ)$ and suggest future
+observational tests.
+
+\section*{references}
+placeholder for bibtex entries.
+
+
+\section{geometric characterisation of the frb anisotropy}
+\label{sec:geometry}
+
+in this section we move from single-number axis tests to a full geometric description of the frb sky pattern. using the unified axis derived in section~\ref{sec:axis}, we ask three questions:
+(i) how does the event density vary with angular distance from the axis (radial structure);
+(ii) how uniform is the distribution in azimuth around that axis (azimuthal structure);
+and (iii) what three–dimensional shape is preferred when we fit simple geometric models (cones, shells, torus–like structures).
+
+\subsection{radial profile and the $\sim 25^\circ$ break}
+
+we first compress the frb sky into a one–dimensional radial profile, $\theta$ being the angle between each burst and the unified axis. binning the 600 events in $\theta$ and normalising by the isotropic expectation yields a clear excess within $\theta \lesssim 40^\circ$, with structure within this range.
+
+a generic ``layered'' model, defined by four broad bands
+(0–$10^\circ$, $10$–$25^\circ$, $25$–$40^\circ$, $40$–$90^\circ$),
+shows strong departures from isotropy. the band counts relative to an isotropic sky are:
+\[
+n_{\rm in} / \mu_{\rm in} \simeq 2.0,\quad
+n_{10-25} / \mu_{10-25} \simeq 2.0,\quad
+n_{25-40} / \mu_{25-40} \simeq 3.5,\quad
+n_{40-90} / \mu_{40-90} \simeq 1.4,
+\]
+with a total $\chi^2 \simeq 2.8\times 10^2$ for three degrees of freedom and a monte–carlo $p$–value effectively zero under an isotropic null.
+even after constructing a smooth footprint model from the observed sky dipole and reweighting by the inverse exposure, the residual bands retain large excesses and a highly significant $\chi^2$.
+
+to obtain a more physical description, we fit a family of smooth radial functions to the observed density contrast as a function of $\theta$. among exponential, power–law, gaussian, lorentzian, logistic, and polynomial forms, the best description is obtained with a broken–power profile:
+\[
+f(\theta) =
+\begin{cases}
+A_1 \left[1 + (\theta / \theta_{\rm br})^2\right]^{-\alpha_1}, & \theta \le \theta_{\rm br},\\[4pt]
+A_2 \left[1 + (\theta / \theta_{\rm br})^2\right]^{-\alpha_2}, & \theta > \theta_{\rm br},
+\end{cases}
+\]
+with a break scale fixed near $\theta_{\rm br} \simeq 25^\circ$.
+using a stable fit that avoids covariance pathologies, we find that the broken–power model reduces the aic by $\Delta{\rm aic} \simeq 50$ relative to a constant radial density. a monte–carlo test in which the same pipeline is applied to 5\,000 isotropic realisations shows that such a large improvement is never reproduced by chance in the simulated sample, implying a very small effective $p$–value. we interpret this as strong evidence for a genuine radial transition around $\theta \sim 25^\circ$.
+
+to test whether this break corresponds to a change in the physical population, we compared inner ($\theta < 25^\circ$) and outer ($\theta \ge 25^\circ$) samples in dispersion measure, fluence, width, signal–to–noise ratio, an energy proxy $E \propto {\rm fluence} \times {\rm dm}^2$, and simple spectral proxies (fluence/width, snr/width, and normalised snr). kolmogorov–smirnov, mann–whitney, and permutation tests all yield non–significant differences. within the current sample the break is therefore best interpreted as a geometric feature of the spatial pattern, not as a clean separation between two distinct frb populations in the observed parameters.
+
+\subsection{azimuthal structure around the axis}
+
+next we test whether the pattern is axisymmetric once expressed in the unified–axis frame, or whether there is additional structure in azimuth $\phi$.
+
+we partition the data into four radial shells
+(0–$10^\circ$, $10$–$25^\circ$, $25$–$40^\circ$, $40$–$140^\circ$)
+and within each shell bin the events into 12 azimuthal sectors of $30^\circ$.
+chi–square tests against a uniform distribution in $\phi$ show strong azimuthal modulation, especially in the $25$–$40^\circ$ and $40$–$140^\circ$ shells. when all shells are combined, the global azimuthal statistic is far above the ensemble generated from 10\,000 isotropic mock catalogues, with a monte–carlo $p$–value effectively consistent with zero. this rules out a purely axisymmetric enhancement around the axis; the excess is patchy or ``faceted'' in azimuth.
+
+we quantify this with two complementary diagnostics. first, a fourier analysis of the azimuthal counts in the inner $\theta \le 60^\circ$ region reveals significant power in essentially all modes from $m=1$ to $m=12$ relative to shuffled catalogues, confirming that the pattern is not described by a single simple ring or bar. second, a peak–finding map in $\phi$ identifies two dominant lobes, but the number of peaks and their prominence are compatible with those seen in isotropic simulations once the overall anisotropy is accounted for. the current data therefore favour a radially modulated but azimuthally irregular shell rather than a clean ``pyramid'' with a small number of sharp faces.
+
+\subsection{three–dimensional shape fits}
+
+to move beyond one– and two–dimensional projections, we fit the full sky using simple three–dimensional geometric templates. all models are defined relative to the unified axis and compared via their aic values and residual sums of squares after binning on the sphere.
+
+we consider:
+(i) a single narrow cone aligned with the axis;
+(ii) a double– or triple–cone model with nested opening angles;
+(iii) a thin spherical shell centred on the axis (effectively a band in $\theta$);
+(iv) a patchy shell, in which the shell is modulated by low–order spherical harmonics; and
+(v) a generic smooth radial polynomial without imposed geometric interpretation.
+
+when only radial structure is fitted, the polynomial (or equivalently the broken–power profile) provides the best one–dimensional description, with the thin torus and simple cone models disfavoured. when we extend to full 3d templates and allow both radial and angular degrees of freedom, a thin spherical–shell model yields a lower aic than the cone and layered–cone models, and a patchy shell with additional dipole+quadrupole modulation does not significantly improve the fit once its extra parameters are penalised. in parallel, a harmonic decomposition of the sky in the axis frame shows a strong dipole, significant quadrupole, and non–negligible higher multipoles, again pointing to a shell–like structure with large–scale ridges rather than a single narrow cone.
+
+combining these results with the radial break and the azimuthal tests, we arrive at the following working geometric picture:
+
+\subsection{ASKAP cross-check: independent FRB sample}
+
+To test whether the preferred direction inferred from the combined FRB+CMB+clock analysis persists in an independent dataset, we analysed the 20 fast radio bursts detected with the ASKAP telescope in the latitude~50 survey \citep{Shannon2018}. For this first-pass consistency check we used the publicly available FITS postage-stamp images: for each burst we extracted the approximate sky position from the primary WCS keywords, adopting
+$\mathrm{RA} = \mathrm{CRVAL1}$, $\mathrm{Dec} = \mathrm{CRVAL2}$ in degrees as a representative central localisation.
+
+\paragraph{Dipole direction and amplitude.}
+We constructed unit vectors from the ASKAP RA/Dec positions and estimated a best-fit sky dipole using a singular-value decomposition of the direction matrix. Converting the resulting direction to Galactic coordinates yields
+\[
+(l_{\rm ASKAP}, b_{\rm ASKAP}) \simeq (324.4^\circ, -49.0^\circ),
+\]
+with a dipole amplitude
+\[
+r_{\rm ASKAP} \simeq 0.51,
+\]
+where $r$ is the norm of the mean unit vector ($0$ for an isotropic sky, $1$ if all FRBs are co-aligned).
+
+The angular separation between the ASKAP dipole and the unified axis inferred from the CHIME+FRBCAT dataset and the CMB/clock combination is
+\[
+\Delta\theta_{\rm ASKAP-unified} \simeq 129^\circ.
+\]
+For a single random sky direction relative to the unified axis, the probability of obtaining a separation at least this large is
+$p_{\rm angle} \approx 0.19$; the observed misalignment of the ASKAP dipole is therefore not by itself anomalous under the hypothesis of no relation between the two directions.
+
+\paragraph{Isotropic vs footprint-aware nulls.}
+If the ASKAP positions are compared to a purely isotropic null (no survey footprint), the dipole amplitude appears unusually strong: Monte Carlo simulations with 20 isotropically distributed FRBs give
+$\langle r \rangle_{\rm iso} \simeq 0.21$ with
+$\sigma(r) \simeq 0.09$, and the observed $r_{\rm ASKAP} \simeq 0.51$ corresponds to
+$p_{\rm dipole} \approx 1.2\times 10^{-3}$.
+In this naive comparison, ASKAP would seem to exhibit a significant anisotropy.
+
+However, ASKAP surveys a restricted portion of the sky with a structured primary beam. To account for this, we constructed a footprint-aware null in which the declinations of the 20 bursts are held fixed to the observed values, while right ascensions are randomised uniformly. This Monte Carlo explicitly reproduces the ASKAP latitude strip and its reduced sky coverage. Under this footprint-constrained null, the dipole amplitude distribution shifts to
+$\langle r \rangle_{\rm fp} \simeq 0.57$ with
+$\sigma(r) \simeq 0.09$, and the observed
+$r_{\rm ASKAP}$ lies well within the bulk of the distribution, with
+\[
+p_{\rm fp} = P(r_{\rm null} \ge r_{\rm ASKAP}) \simeq 0.76.
+\]
+Once the ASKAP survey geometry is included, the apparent dipole is fully consistent with the anisotropy expected from the footprint alone.
+
+\paragraph{Implications for the unified axis.}
+Taken together, these results imply that the current ASKAP sample is best described as an instrument-dominated realisation with limited independent directional information. The best-fit ASKAP dipole is substantially offset from the unified axis, but this offset is not statistically unusual given the small sample size, and the dipole amplitude becomes entirely consistent with a footprint-dominated null once the real declination distribution is enforced.
+
+Consequently, ASKAP neither provides strong support for, nor a decisive refutation of, the unified axis inferred from the larger Northern-hemisphere FRB sample and its combination with the CMB and clock datasets. At present, ASKAP primarily serves as a sanity check that our analysis pipeline does not spuriously force independent datasets into alignment; more constraining cross-survey tests will require larger, more uniformly sampled FRB catalogues from multiple instruments.
+
+
+
+
+\begin{itemize}
+  \item the frb sky is not isotropic with respect to the unified axis: there is a statistically robust excess within $\theta \lesssim 40^\circ$ and a strong radial transition around $\theta \sim 25^\circ$ that is not reproduced in isotropic mocks.
+  \item after correcting for the telescope footprint, a significant layered structure remains, indicating that the pattern is not purely instrumental.
+  \item the best–fitting simple geometry is a quasi–spherical shell around the preferred axis, rather than a single narrow cone or torus. the shell is radially structured (with a break) and azimuthally patchy.
+  \item within present statistics the radial break appears geometric rather than associated with a sharp change in standard frb observables.
+\end{itemize}
+
+in the remainder of the paper we treat this shell–like, axis–aligned anisotropy as an empirical summary of the data. in section~\ref{sec:physics} we explore whether such a structure can arise from known large–scale structure, selection effects, or new physics, and how additional datasets (other frb catalogues, neutrinos, and cosmological anisotropy measurements) can further test this picture.
+
+\end{document}

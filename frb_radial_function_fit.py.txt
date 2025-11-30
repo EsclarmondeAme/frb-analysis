@@ -1,0 +1,160 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from astropy.coordinates import SkyCoord
+import astropy.units as u
+from scipy.optimize import curve_fit
+
+UNIFIED_L = 159.85
+UNIFIED_B = -0.51
+
+# ============================================================
+# RADIAL FUNCTION DEFINITIONS
+# ============================================================
+
+def poly2(theta, a, b, c):
+    return a + b*theta + c*theta**2
+
+def exponential(theta, A, tau):
+    return A * np.exp(-theta / tau)
+
+def gaussian(theta, A, mu, sigma):
+    return A * np.exp(-(theta - mu)**2 / (2 * sigma**2))
+
+def lorentzian(theta, A, sigma):
+    return A / (1 + (theta/sigma)**2)
+
+def powerlaw(theta, A, alpha):
+    return A * np.power(theta + 1e-6, -alpha)
+
+def broken_powerlaw(theta, A1, A2, alpha1, alpha2, Rb):
+    out = np.zeros_like(theta)
+    mask = theta < Rb
+    out[mask] = A1 * (theta[mask] + 1e-6)**(-alpha1)
+    out[~mask] = A2 * (theta[~mask] + 1e-6)**(-alpha2)
+    return out
+
+def logistic(theta, A, th0, k):
+    return A / (1 + np.exp((theta - th0)/k))
+
+# ============================================================
+# LOAD DATA
+# ============================================================
+
+df = pd.read_csv("frbs.csv")
+coords = SkyCoord(ra=df["ra"].values*u.deg,
+                  dec=df["dec"].values*u.deg,
+                  frame="icrs")
+l = coords.galactic.l.deg
+b = coords.galactic.b.deg
+
+# ============================================================
+# COMPUTE ANGULAR DISTANCE FROM UNIFIED AXIS
+# ============================================================
+
+def angdist(l1, b1, l2, b2):
+    c1 = np.deg2rad(l1)
+    d1 = np.deg2rad(b1)
+    c2 = np.deg2rad(l2)
+    d2 = np.deg2rad(b2)
+    cosang = np.sin(d1)*np.sin(d2) + np.cos(d1)*np.cos(d2)*np.cos(c1-c2)
+    cosang = np.clip(cosang, -1, 1)
+    return np.rad2deg(np.arccos(cosang))
+
+theta = angdist(l, b, UNIFIED_L, UNIFIED_B)
+
+# ============================================================
+# BINNING FOR RADIAL PROFILE
+# ============================================================
+
+bins = np.linspace(0, 140, 60)
+bc = 0.5 * (bins[1:] + bins[:-1])
+
+H, _ = np.histogram(theta, bins=bins)
+y = H.astype(float)
+theta_centers = bc
+yerr = np.sqrt(y + 1)
+
+# ============================================================
+# FITTING HELPERS
+# ============================================================
+
+def fit_model(func, p0):
+    try:
+        popt, _ = curve_fit(func, theta_centers, y, p0=p0, maxfev=20000)
+        yfit = func(theta_centers, *popt)
+        rss = np.sum((y - yfit)**2)
+        k = len(popt)
+        n = len(y)
+        aic = n*np.log(rss/n) + 2*k
+        bic = n*np.log(rss/n) + k*np.log(n)
+        return popt, rss, aic, bic
+    except:
+        return None, np.inf, np.inf, np.inf
+
+# ============================================================
+# RUN ALL MODELS
+# ============================================================
+
+models = {}
+
+models["poly2"]         = fit_model(poly2, [10, -0.1, 0.001])
+models["exponential"]   = fit_model(exponential, [100, 20])
+models["gaussian"]      = fit_model(gaussian, [100, 40, 10])
+models["lorentzian"]    = fit_model(lorentzian, [200, 20])
+models["power-law"]     = fit_model(powerlaw, [1000, 1.0])
+models["broken-power"]  = fit_model(broken_powerlaw, [1000, 100, 1.0, 0.2, 30])
+models["logistic"]      = fit_model(logistic, [200, 40, 5])
+
+# ============================================================
+# FIND BEST MODELS
+# ============================================================
+
+ranking = []
+for name, (p, rss, aic, bic) in models.items():
+    ranking.append((name, rss, aic, bic))
+ranking = sorted(ranking, key=lambda x: x[2])
+
+best_name, best_rss, best_aic, best_bic = ranking[0]
+
+# ============================================================
+# PRINT RESULTS
+# ============================================================
+
+print("======================================================================")
+print("FRB RADIAL FUNCTION FITTING")
+print("======================================================================")
+for name, rss, aic, bic in ranking:
+    print(f"{name:15s}  AIC={aic:10.2f}   BIC={bic:10.2f}   RSS={rss:10.2f}")
+print("----------------------------------------------------------------------")
+print(f"BEST MODEL BY AIC: {best_name}")
+print("======================================================================")
+
+# ============================================================
+# PLOT
+# ============================================================
+
+plt.figure(figsize=(8,5))
+plt.errorbar(theta_centers, y, yerr=yerr, fmt='o', label="data", alpha=0.6)
+
+best_params = models[best_name][0]
+best_func = {
+    "poly2": poly2,
+    "exponential": exponential,
+    "gaussian": gaussian,
+    "lorentzian": lorentzian,
+    "power-law": powerlaw,
+    "broken-power": broken_powerlaw,
+    "logistic": logistic,
+}[best_name]
+
+xs = np.linspace(0, 140, 500)
+plt.plot(xs, best_func(xs, *best_params), lw=2, label=f"best: {best_name}")
+
+plt.xlabel("theta (deg)")
+plt.ylabel("FRB density (binned)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("radial_function_fit.png")
+print("saved: radial_function_fit.png")
+print("analysis complete.")

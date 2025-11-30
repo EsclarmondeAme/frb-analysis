@@ -1,0 +1,99 @@
+geometry of the anisotropy
+
+(draft section for the paper)
+
+1. preferred axis determination
+
+three independent tracers — the cmb hemispherical modulation axis, the frb angular clustering axis, and the terrestrial sidereal-phase “clock” peak — converge to within ≈5–10°, defining a statistically preferred sky direction.
+the unified best-fit axis derived from the frb sample is
+
+(l, b) = (159.85°, −0.51°)
+
+jackknife tests, hemisphere splits, and random-axis comparisons confirm that this axis is stable under resampling, with typical shifts 10° for all but the most aggressive sky cuts.
+
+2. radial structure relative to the axis
+
+when frbs are projected onto angular distance θ from the unified axis
+
+a strong, statistically significant radial break appears at
+θ ≈ 25°
+
+ΔAIC(real) = 52.6 relative to a constant model
+
+monte carlo null p-value ≪ 1e−4
+
+no corresponding change in DM, width, fluence, or energy across the break
+
+interpretation
+the break is geometric rather than physical — a structural change in the angular distribution, not in the frb population properties.
+
+3. evaluation of simple geometric models
+
+we tested multiple candidate shapes
+
+model	result
+single cone	disfavored (residual tests show no robust support)
+doubletriple cone	improvements vanish after footprint correction
+torusring	strongly disfavored (ΔAIC = −23.7; p=1.000)
+polar cap	poor fit
+radial polynomial	best overall fit (minimum AIC)
+broken-power radial	also competitive, capturing the ≈25° break
+
+conclusion
+no simple “cone,” “ring,” “torus,” or “cap” geometry describes the sky pattern.
+the angular density is better approximated by a smooth radial function with a single structural transition.
+
+4. azimuthal structure
+
+azimuthal symmetry tests (axisymmetry χ², Fourier m-mode analyses, lobe-finder) show
+
+significant non-axisymmetric structure
+
+strongly detected m=1 component
+
+higher modes marginal
+
+peak-map analysis does not favor a fixed number of discrete lobes (p ≈ 0.82)
+
+this indicates “patchiness” or “faceting,” but not a stable polygonal shape (e.g., pyramid, hexagon, square).
+
+5. multipole decomposition
+
+spherical-harmonic reconstruction (ℓ ≤ 15) reveals
+
+a dominant dipole aligned near the unified axis
+
+a significant quadrupole component
+
+additional weaker higher-order contributions
+
+the combination suggests a smooth, axis-aligned gradient plus an extended ridge, not a sharply edged object.
+
+6. 3d anisotropy reconstruction
+
+the full 3d reconstruction shows
+
+anisotropy concentrated along a broad band perpendicular to the axis
+
+no evidence for a closed ring or hollow torus
+
+rather, a broad ridge or wall-like feature
+
+7. combined geometric verdict
+
+putting it together
+
+a real, statistically secure preferred axis
+
+a real radial break at ≈25°
+
+no clean simple shape (coneringtorus)
+
+azimuthal structure present but not periodic
+
+best-fitting model
+a smooth radial profile with one transition + mild faceting
+
+in scientific language
+
+the anisotropy resembles a broad, axis-centered ridge or sheet with a radial density transition, rather than a sharply defined geometric object

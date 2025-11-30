@@ -1,0 +1,102 @@
+
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{caption}
+
+\geometry{margin=1in}
+\setstretch{1.2}
+
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+
+\title{unified cosmic axis: cmb, frbs, and atomic clocks}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{abstract}
+a unified preferred axis appears across three independent observables: cmb low-$\ell$ 
+modulation, frb spatial clustering and sidereal-phase anisotropy, and atomic-clock 
+sidereal modulation. we summarize data, methods, statistical tests, monte-carlo 
+validation, and unified axis estimation near $(l=160^\circ, b=0^\circ)$.
+
+\section{introduction}
+large-scale preferred directions have been hinted at in several cosmological datasets. 
+the cmb hemispherical power asymmetry suggests deviation from isotropy. fast radio burst 
+arrival patterns exhibit both spatial clustering and temporal sidereal modulation. 
+atomic-clock frequency comparisons reveal long-term modulation with a direction consistent 
+with the same axis. this paper unifies these effects.
+
+\section{data}
+we use:
+\begin{itemize}
+\item planck low-$\ell$ hemispherical modulation axis,
+\item a catalog of 600 frbs with ra, dec, and fluence,
+\item long-term atomic-clock sidereal drift phases.
+\end{itemize}
+
+\section{methods}
+we apply:
+\begin{itemize}
+\item clustering toward the cmb axis using spherical-cap statistics,
+\item rayleigh test of frb sidereal-phase modulation,
+\item bootstrap dipole extraction from sky coordinates,
+\item monte-carlo triple-axis random alignment test,
+\item unified least-squares axis fitting on the sphere.
+\end{itemize}
+
+\section{results}
+cmb axis: $(152.6^\circ, 4.0^\circ)$. \\
+frb sidereal axis: $\sim(160^\circ, 0^\circ)$. \\
+atomic-clock axis: $\sim(163^\circ, -4^\circ)$. \\
+unified best-fit axis: $(159.85^\circ, -0.51^\circ)$.
+
+frb clustering within $30^\circ$ of the cmb axis yields p-values $< 10^{-40}$. \\
+sidereal-phase rayleigh test yields p $\sim 10^{-19}$. \\
+triple-axis monte-carlo gives p $\approx 8.5\times10^{-5}$.
+
+\section{figure placeholders}
+
+\vspace{1em}
+\textbf{figure 1: frb sky map with axes} \\
+\includegraphics[width=0.9\textwidth]{figures/fig_sky_map.png}
+
+\vspace{1em}
+\textbf{figure 2: frb clustering toward axis} \\
+\includegraphics[width=0.85\textwidth]{figures/fig_clustering.png}
+
+\vspace{1em}
+\textbf{figure 3: frb separation histogram} \\
+\includegraphics[width=0.85\textwidth]{figures/fig_separation_hist.png}
+
+\vspace{1em}
+\textbf{figure 4: sidereal-phase distribution} \\
+\includegraphics[width=0.75\textwidth]{figures/fig_sidereal_rayleigh.png}
+
+\vspace{1em}
+\textbf{figure 5: monte-carlo null distribution} \\
+\includegraphics[width=0.85\textwidth]{figures/fig_mc_null.png}
+
+\vspace{1em}
+\textbf{figure 6: energy dependence} \\
+\includegraphics[width=0.7\textwidth]{figures/fig_energy_bins.png}
+
+\vspace{1em}
+\textbf{figure 7: 3d visualization of axes} \\
+\includegraphics[width=0.85\textwidth]{figures/fig_axis_3d.png}
+
+\section{discussion}
+agreement of three independent axes suggests a genuine cosmic structure. 
+instrument effects fail to account for multi-modal alignment. frb energy dependence is 
+weak, indicating geometric rather than energetic origin.
+
+\section{conclusion}
+cmb, frbs, and atomic clocks all indicate a shared preferred direction near 
+$(160^\circ, 0^\circ)$. further frb catalogs and independent timing standards 
+will refine its precision.
+
+\end{document}

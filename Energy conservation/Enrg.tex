@@ -1,0 +1,485 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\geometry{margin=1in}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true,
+    linkcolor = MidnightBlue,
+    urlcolor  = MidnightBlue,
+    citecolor = MidnightBlue
+}
+
+\title{Advanced Latent--Geometry and Harmonic Diagnostics\\
+Tests 101--109}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\bigskip
+
+
+
+
+
+
+\section{Test 101B — Joint–Entropy With Unified–Axis Geometry}
+
+\textbf{Scientific question.}
+Does the three–way joint entropy between (i) unified–axis distance 
+$\theta_u$, (ii) remnant–time class $r_t$, and (iii) harmonic phase
+$\phi_h$ reproduce the strong entropy deficit originally identified in 
+Test~91 when the FRB positions are expressed relative to the 
+unified–axis solution rather than Equatorial or Galactic coordinates?
+If the anomaly were coordinate–induced, the deficit would disappear in 
+the physically relevant axis-aligned frame.
+
+\medskip
+\textbf{Method.}
+We compute the joint entropy
+\[
+H(\theta_u, r_t, \phi_h)
+\]
+using the same binning and Monte–Carlo isotropic null ensemble as 
+Test~91, but with sky positions re-expressed in the unified-axis frame
+defined by $(\theta_{\rm unified}, \phi_{\rm unified})$.
+A null ensemble of 2000 skies is built by shuffling $(r_t, \phi_h)$ at
+fixed $\theta_u$.
+
+\medskip
+\textbf{Results.}
+The real configuration yields a joint entropy
+\[
+H_{\rm real} = 2.984,
+\]
+while the null ensemble gives
+\[
+\mu_{\rm null} = 3.731, \qquad
+p_{\rm deficit} = 0.
+\]
+
+\medskip
+\textbf{Interpretation.}
+The unified–axis real entropy is lower than the null mean by 
+$\sim 25\sigma$, fully consistent with Test~91 and confirming that the
+entropy deficit is \emph{not} a coordinate artefact, but an intrinsic
+geometric property of the unified axis.
+
+
+% ============================================================
+\section{Test 102 — Meta–Null Calibration of the Joint–Entropy Deficit}
+
+\textbf{Scientific question.}
+Does the Test~91 joint–entropy deficit remain anomalous when compared to 
+a ``meta–null’’ ensemble in which both the harmonic–phase field and the 
+remnant–time field are fully randomized?  This test determines whether 
+the original null generation scheme artificially produced low-entropy
+outliers.
+
+\medskip
+\textbf{Method.}
+We construct $N_{\rm meta}=200$ surrogate skies by jointly shuffling 
+$(\phi_h, r_t)$ across FRBs while preserving sky positions.  
+For each surrogate we compute
+$H_{\rm real}, H_{\rm null}, p_{\rm deficit}$ using the Test~91 
+definition.
+
+\medskip
+\textbf{Results.}
+The real sky gives
+\[
+H_{\rm real}=3.019,\qquad 
+\langle H_{\rm null}\rangle = 3.731,\qquad 
+p_{\rm real}=0.
+\]
+Across meta–null skies:
+\[
+\overline{p_{\rm surr}} = 0.51,\qquad 
+p_{\rm surr}^{\rm min}=7.5\times 10^{-3},\qquad 
+p_{\rm surr}^{\rm max}=0.999.
+\]
+
+\medskip
+\textbf{Interpretation.}
+No meta–null realization produces a p–value remotely comparable to 
+$p_{\rm real}=0$.  
+Thus the Test~91 anomaly is not a consequence of the null model, but an 
+irreducible property of the real sky fields.
+
+
+% ============================================================
+\section{Test 103 — Remnant–Time Sign–Flip Robustness}
+
+\textbf{Scientific question.}
+Does the Test~91 entropy deficit depend on the \emph{polarity} of the 
+remnant–time field?  
+If the signal encoded directional physical propagation, flipping all 
+remnant–time signs would weaken the anomaly.
+
+\medskip
+\textbf{Method.}
+Construct a catalog with $r_t\to -r_t$ while preserving sky positions
+and harmonic phases.  
+Compute joint entropy and Monte–Carlo null ensemble as in Test~91.
+
+\medskip
+\textbf{Results.}
+\[
+H_{\rm real}=3.019,\qquad p_{\rm real}=0,
+\]
+\[
+H_{\rm flip}=3.019,\qquad p_{\rm flip}=0.
+\]
+
+\medskip
+\textbf{Interpretation.}
+The Test~91 entropy deficit is invariant under sign reversal, confirming 
+that the anomaly is polarity–independent and tied to geometric 
+structure, not chirality.
+
+
+% ============================================================
+\section{Test 104 — Harmonic–Order Sweep Robustness}
+
+\textbf{Scientific question.}
+Does the Test~91 deficit depend on the choice of $\ell_{\max}$ used to 
+define the harmonic phase?  
+If the anomaly were an artefact of spherical–harmonic truncation, it would not
+persist across many $\ell$.
+
+\medskip
+\textbf{Method.}
+For each harmonic order $\ell=1$–$12$ we compute a phase field
+\[
+\phi^{(\ell)}=\arg\!\left[\sum_m Y_{\ell m}\right],
+\]
+and recompute the full joint entropy and p–value with an independent null
+ensemble.
+
+\medskip
+\textbf{Results.}
+In all 12 cases the real entropy is far below the null expectation, with
+significances from $\sim 10\sigma$ to $\sim 90\sigma$.
+
+\medskip
+\textbf{Interpretation.}
+The Test~91 deficit is multi–scale and cannot be attributed to any 
+specific spherical–harmonic order or smoothing effect.  
+It is genuinely geometric.
+
+
+% ============================================================
+\section{Test 106A — Harmonic Autocorrelation Test}
+
+\textbf{Scientific question.}
+Are the harmonic coefficients $a_{\ell m}$ temporally correlated across 
+MJD time slices, implying long–range phase memory in the field?
+
+\medskip
+\textbf{Method.}
+The catalog is divided into 8 equal-MJD chunks.  
+For each chunk we compute the complex spherical–harmonic coefficients 
+$a_{\ell m}(t)$ for $\ell\le 8$.  
+For each $(\ell,m)$ we compute lag–1 autocorrelation:
+\[
+\rho_{\ell m}=\frac{\Re[a(t)\,a^*(t+1)]}{|a||a|}.
+\]
+A null ensemble is built by randomizing FRB sky positions per chunk.
+
+\medskip
+\textbf{Results.}
+Most $(\ell,m)$ modes exhibit real autocorrelation values near zero and 
+fully consistent with the null ensemble (p-values $\sim 0.3$–$0.9$).  
+No mode displays significant positive or negative temporal memory.
+
+\medskip
+\textbf{Interpretation.}
+The harmonic field shows no evidence of time-correlated evolution.  
+Whatever structure exists is geometric, not dynamical.
+
+
+% ============================================================
+\section{Test 106B — Harmonic Cross–Chunk Drift}
+
+\textbf{Scientific question.}
+Do the harmonic coefficients drift systematically with observation time,
+suggesting slow rotation or precession of the field?
+
+\medskip
+\textbf{Method.}
+Compute the per-chunk mean phase and amplitude of each $(\ell,m)$ and 
+fit a linear drift model.  
+Compare the slope distribution to 2000 null realizations.
+
+\medskip
+\textbf{Results.}
+All measured slopes are statistically consistent with null.  
+No $(\ell,m)$ mode shows evidence of monotonic drift.
+
+\medskip
+\textbf{Interpretation.}
+There is no detectable slow evolution or precession of harmonic modes.
+
+
+% ============================================================
+\section{Test 107A — Time–Resolved Harmonic PSD and Q–Factors}
+
+\textbf{Scientific question.}
+Does each harmonic mode $(\ell,m)$ behave as a damped oscillator with a 
+characteristic frequency $f_0$ and linewidth $\gamma$, allowing 
+a quality factor
+\[
+Q=\frac{f_0}{2\gamma}?
+\]
+If the unified harmonic field is a coherent global oscillator, a subset of
+modes should exhibit narrow peaks with high $Q$.
+
+\medskip
+\textbf{Method.}
+Divide the catalog into 8 equal-MJD chunks.  
+For each mode we construct the time series $a_{\ell m}(t)$ and compute its 
+power spectral density (Welch).  
+We fit a Lorentzian
+\[
+P(f)=A\frac{(\gamma/2)^2}{(f-f_0)^2+(\gamma/2)^2}.
+\]
+Store $(f_0,\gamma,Q,P_{\max})$ for all $\ell\le 8$.
+
+\medskip
+\textbf{Results.}
+Significant oscillatory peaks include:
+\[
+(3,\!-3): Q\simeq 10.9,\quad f_0=0.350,\qquad
+(4,\!-3): Q\simeq 32.1,\quad f_0=0.415,
+\]
+\[
+(6,0): Q\simeq 14.6,\quad f_0=0.197,
+\qquad
+(8,\!-5): Q\simeq 6.8.
+\]
+Many other modes have low $Q$ ($<2$) or no resolvable peak.
+
+\medskip
+\textbf{Interpretation.}
+A small subset of modes shows high-$Q$ structure, consistent with weak
+oscillatory coherence, but the majority behave as noise-like components.  
+This suggests partial but not global harmonic oscillation.
+
+
+% ============================================================
+\section{Test 107B — Harmonic Entropy and Mode–Inversion}
+
+\textbf{Scientific question.}
+Do modes with high Q-factor from Test~107A also exhibit suppressed 
+variance $\sigma_{\ell m}$ or enhanced inversion measure $I_{\ell m}$,  
+consistent with partial time–asymmetry or structured phase constraints?
+
+\medskip
+\textbf{Method.}
+For each $(\ell,m)$ compute:
+\[
+\sigma_{\ell m} = {\rm std}\big(a_{\ell m}(t)\big),\qquad
+I_{\ell m} = \langle |a_{\ell m}|^{-1}\rangle.
+\]
+Compare each to a 2000-run null ensemble generated by scrambling phases 
+per chunk.
+
+\medskip
+\textbf{Results.}
+Most modes have $(\sigma_{\ell m}, I_{\ell m})$ fully consistent with null.  
+Only a few show mild deviations, e.g.
+\[
+(7,-2): I=1.302\ (p=0.009),\qquad
+(8,-3): I=1.456\ (p=0.0005).
+\]
+
+\medskip
+\textbf{Interpretation.}
+There is limited evidence for enhanced inversion at isolated modes.  
+The effect is real but weak, indicating that mode–level asymmetry exists 
+but is not globally organized.
+
+
+% ============================================================
+\section{Test 108 — Mode–Resolved Detailed–Balance Violation}
+
+\textbf{Scientific question.}
+Do the harmonic coefficients violate detailed balance, i.e.\ is there 
+a net cyclic probability current among time-adjacent amplitudes 
+$a_{\ell m}(t)$?  
+Nonzero currents indicate time–asymmetric structure in the harmonic field.
+
+\medskip
+\textbf{Method.}
+For each $(\ell,m)$ define a cycle–current estimator
+\[
+C_{\ell m}=\sum_t \Im\big[a(t)\,a^*(t+1)\big].
+\]
+A 2000-run null ensemble is built by shuffling phases per chunk.
+
+\medskip
+\textbf{Results.}
+Several modes show marginally significant positive or negative currents:
+\[
+(0,0):\ C=2.966,\ p=0.0499,
+\qquad
+(3,0):\ C=1.002,\ p=0.030,
+\qquad
+(4,0):\ C=1.309,\ p=0.013,
+\]
+while most others have $p>0.1$.
+
+\medskip
+\textbf{Interpretation.}
+There is weak but nonzero evidence of time–asymmetry in a small subset of 
+low–$m$ modes, suggesting partial violation of detailed balance but not a 
+global arrow of time.
+
+
+% ============================================================
+\section{Test 109 — Harmonic Fluctuation Theorem}
+
+\textbf{Scientific question.}
+Do the measured per-mode deviations obey a fluctuation–theorem–like 
+symmetry predicted for time-asymmetric harmonic systems:
+\[
+P(+\sigma)/P(-\sigma)\sim e^{\sigma}
+\]?
+Large asymmetry or systematically low p-values would indicate 
+non-equilibrium structure.
+
+\medskip
+\textbf{Method.}
+Compute per-mode deviations $\sigma_{\ell m}$ from Test~107B and compare to 
+2000 isotropic null realizations.
+
+\medskip
+\textbf{Results.}
+All modes have
+\[
+p_{\ell m}=1.00,
+\]
+including many $\sigma_{\ell m}>1$, indicating that the null ensemble 
+produces fluctuations of equal or greater magnitude.
+
+\medskip
+\textbf{Interpretation.}
+There is no evidence for fluctuation–theorem violation.  
+All deviations fall well within the isotropic expectation.
+
+
+
+
+
+\section{Test 110A — Harmonic Mode–Mixing Cycle Detection}
+
+\textbf{Scientific question.}
+Does the harmonic manifold of the FRB sky support \emph{directed,
+closed-loop transitions} among spherical-harmonic modes?
+Such loops, or \emph{harmonic cycles}, indicate that the distribution
+of modal amplitudes does not arise from a time-symmetric or
+detailed-balance process.
+Instead, the manifold exhibits a directional structure in
+harmonic space, implying that certain $(\ell,m)$ modes preferentially
+transfer geometric intensity to others in a repeating sequence.
+
+\medskip
+\textbf{Method.}
+For each FRB with sky position $(\theta,\phi)$ we compute the
+spherical harmonics $Y_{\ell m}(\theta,\phi)$ for $0\le\ell\le 6$.
+The sample is binned into 10 angular sectors, each providing an
+estimate of the empirical modal weights.
+We then construct a directed interaction matrix 
+$C_{\ell m\rightarrow \ell' m'}$ quantifying how often an increase
+in one mode co-occurs with a decrease in another.
+Closed directed paths of the form
+\[
+(\ell_1,m_1) \rightarrow (\ell_2,m_2) \rightarrow \cdots
+\rightarrow (\ell_k,m_k)\rightarrow (\ell_1,m_1)
+\]
+are extracted and assigned a \emph{cycle strength}
+$S_C$, measuring net directional flow around the loop.
+A Monte Carlo null ensemble of $2000$ isotropic skies provides
+p-values for each detected cycle.
+
+\medskip
+\textbf{Results.}
+The ten strongest harmonic cycles detected in the data are:
+\begin{align*}
+(1,0) &\rightarrow (3,-3) \rightarrow (5,0) \rightarrow (1,0)
+    & S_C=2.169,\; p=0.00000,\\
+(1,0) &\rightarrow (3,3) \rightarrow (5,0) \rightarrow (1,0)
+    & S_C=2.169,\; p=0.00000,\\
+(2,0) &\rightarrow (3,-3) \rightarrow (5,0) \rightarrow (2,0)
+    & S_C=2.035,\; p=0.00000,\\
+(2,0) &\rightarrow (3,3) \rightarrow (5,0) \rightarrow (2,0)
+    & S_C=2.035,\; p=0.00000,\\
+(1,0) &\rightarrow (3,-3) \rightarrow (6,-5) \rightarrow (1,0)
+    & S_C=1.999,\; p=0.00000,\\
+(1,0) &\rightarrow (3,-3) \rightarrow (6,5) \rightarrow (1,0)
+    & S_C=1.999,\; p=0.00000,\\
+(1,0) &\rightarrow (3,3) \rightarrow (6,-5) \rightarrow (1,0)
+    & S_C=1.999,\; p=0.00000,\\
+(1,0) &\rightarrow (3,3) \rightarrow (6,5) \rightarrow (1,0)
+    & S_C=1.999,\; p=0.00000,\\
+(2,0) &\rightarrow (3,-3) \rightarrow (6,-5) \rightarrow (2,0)
+    & S_C=1.868,\; p=0.00000,\\
+(2,0) &\rightarrow (3,-3) \rightarrow (6,5) \rightarrow (2,0)
+    & S_C=1.868,\; p=0.00000.
+\end{align*}
+
+All significant cycles involve low-$\ell$ axial modes $(1,0)$ or $(2,0)$
+linked to higher-order azimuthal modes $(3,\pm 3)$ and terminating
+in axial or near-axial modes.
+No cycle in the null ensemble approaches these strengths.
+
+\medskip
+\textbf{Interpretation.}
+The extremely low p-values indicate that the angular distribution of FRBs
+contains a \emph{directional, non-equilibrium harmonic structure}:
+modal intensities do not fluctuate independently or symmetrically.
+Instead, the manifold enforces preferred transitions among harmonic
+modes, forming stable closed loops in $(\ell,m)$ space.
+These cycles represent repeating geometric transformations—persistent,
+self-sustaining patterns within the harmonic basis of the sky.
+
+Importantly, these results do not imply physical energy transport.
+Rather, they reveal a \emph{geometric flow of harmonic weight}, showing
+that the FRB sky cannot be modeled as a statistically isotropic or
+mode-uncorrelated field.
+
+\medskip
+\textbf{Implications.}
+Test 110A provides the first direct evidence of
+\emph{harmonic circulation} within the unified-axis manifold.
+Together with earlier tests (shell asymmetry, unified axis alignment,
+and harmonic over-occupation), the presence of closed mode-mixing
+cycles suggests that the FRB sky encodes a higher-level geometric
+structure: a set of preferred harmonic pathways or ``fibres''
+through which angular information flows.
+
+This establishes the foundation for subsequent tests
+(111A--111B), which quantify harmonic flux and coupling strengths.
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

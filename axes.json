@@ -1,0 +1,16 @@
+{
+  "unified_axis": {
+    "l": 159.85,
+    "b": -0.51
+  },
+
+  "cmb_hemisphere_asymmetry": {
+    "l": 152.62,
+    "b": 4.03
+  },
+
+  "sidereal_modulation_peak": {
+    "l": 163.54,
+    "b": -3.93
+  }
+}
