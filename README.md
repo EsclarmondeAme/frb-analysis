@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17778004.svg)](https://doi.org/10.5281/zenodo.17778004)
+
+
 FRB Analysis Toolkit
 
 This repository provides a collection of tools for analyzing the current sample of Fast Radio Bursts (FRBs).
